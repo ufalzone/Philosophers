@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 18:34:18 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/02/24 19:04:49 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:44:30 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 struct s_philo;
 
+#include <pthread.h>
+
 typedef struct s_global
 {
-	int id;
 	int nb_philo;
 	int time_to_die;
 	int time_to_eat;

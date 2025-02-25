@@ -1,48 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 18:02:24 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/02/24 18:02:30 by ufalzone         ###   ########.fr       */
+/*   Created: 2025/02/25 15:31:12 by ufalzone          #+#    #+#             */
+/*   Updated: 2025/02/25 15:39:45 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-size_t	ft_strlen(const char *s)
+void	routine(void *arg)
 {
-	int	i;
+	t_thread_data *data;
 
-	i = 0;
-	while (s[i])
-		++i;
-	return (i);
+	data = (t_thread_data *)arg;
+
 }
 
-long	ft_atoi(const char *str)
+void	exec_philo(t_global *global)
 {
-	long	num;
-	int		sign;
-	int		i;
+	int	i;
+	t_thread_data *data;
 
 	i = 0;
-	sign = 1;
-	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
-		++i;
-	if (str[i] == '-' || str[i] == '+')
-		if (str[i++] == '-')
-			sign = -1;
-	num = 0;
-	while (str[i] >= '0' && str[i] <= '9')
+	while (i < global->nb_philo)
 	{
-		num *= 10;
-		num = num + (str[i] - '0');
-		++i;
-		if (num > INT_MAX)
-			break ;
+		data = malloc(sizeof(t_thread_data));
+		if (!data)
+			return;
+		data->philo = global->philo_array[i];
+		data->global = global;
+		pthread_create(&global->philo_array[i]->id_thread, NULL, (void *)routine, data);
+		i++;
 	}
-	return (num * sign);
 }
