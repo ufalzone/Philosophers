@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 17:51:13 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/02/25 15:39:27 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:04:59 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/time.h>
 #define MAX_PHILO 200
 
 #include "global.h"
@@ -34,13 +35,11 @@
 typedef struct s_philo
 {
 	int id;
-	pthread_t id_thread;
 	long dernier_repas;
 	int nb_repas;
+	pthread_t id_thread;
 	pthread_mutex_t *fourchette_gauche;
 	pthread_mutex_t *fourchette_droite;
-	long temps_mort;
-	t_global *global;
 }	t_philo;
 
 // Utils Libft
