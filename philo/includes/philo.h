@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 17:51:13 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/02/27 20:04:59 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/02/28 00:15:11 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	init_all_philo(t_global *global);
 
 // Exec
 void	exec_philo(t_global *global);
-
+void	clear_all_philo(t_global *global);
+long elapsed_time(struct timeval start);
+void	routine(void *arg);
 
 #endif

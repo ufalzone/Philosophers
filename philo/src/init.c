@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:28:15 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/02/27 21:37:42 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/02/27 23:58:34 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	init_global(t_global *global, int ac, char **av)
 	global->time_to_die = ft_atoi(av[2]) * 1000;
 	global->time_to_eat = ft_atoi(av[3]) * 1000;
 	global->time_to_sleep = ft_atoi(av[4]) * 1000;
-	global->somebody_is_dead = 0;
 	if (ac == 6)
 	{
 		global->nb_eat = ft_atoi(av[5]);

@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:29:24 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/02/25 15:33:23 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/02/28 00:09:25 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,12 @@ void	check_args(int ac, char **av)
 		else if (i != 1 && i != 5 && (num < 1 || num > INT_MAX))
 			ft_error("Error: wrong number of arguments\n");
 	}
+}
+
+long elapsed_time(struct timeval start)
+{
+	struct timeval now;
+
+	gettimeofday(&now, NULL);
+	return ((now.tv_sec - start.tv_sec) * 1000 + (now.tv_usec - start.tv_usec) / 1000);
 }
