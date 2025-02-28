@@ -6,30 +6,13 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:28:15 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/02/27 23:58:34 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/02/28 14:45:43 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	init_global(t_global *global, int ac, char **av)
-{
-	global->nb_philo = ft_atoi(av[1]);
-	global->time_to_die = ft_atoi(av[2]) * 1000;
-	global->time_to_eat = ft_atoi(av[3]) * 1000;
-	global->time_to_sleep = ft_atoi(av[4]) * 1000;
-	if (ac == 6)
-	{
-		global->nb_eat = ft_atoi(av[5]);
-		global->if_nb_eat = 1;
-	}
-	else
-	{
-		global->nb_eat = -1;
-		global->if_nb_eat = 0;
-	}
-}
-void	init_fourchette(t_global *global)
+static void	init_fourchette(t_global *global)
 {
 	int	i;
 	pthread_mutex_t	*fourchette;
@@ -44,6 +27,24 @@ void	init_fourchette(t_global *global)
 		i++;
 	}
 	global->fourchette = fourchette;
+}
+
+void	init_global(t_global *global, int ac, char **av)
+{
+	global->nb_philo = ft_atoi(av[1]);
+	global->time_to_die = ft_atoi(av[2]);
+	global->time_to_eat = ft_atoi(av[3]);
+	global->time_to_sleep = ft_atoi(av[4]);
+	if (ac == 6)
+	{
+		global->nb_eat = ft_atoi(av[5]);
+		global->if_nb_eat = 1;
+	}
+	else
+	{
+		global->nb_eat = -1;
+		global->if_nb_eat = 0;
+	}
 }
 
 void	init_all_philo(t_global *global)

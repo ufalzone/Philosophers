@@ -6,7 +6,7 @@
 #    By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/30 18:16:42 by ufalzone          #+#    #+#              #
-#    Updated: 2025/02/27 15:42:17 by ufalzone         ###   ########.fr        #
+#    Updated: 2025/02/28 13:25:48 by ufalzone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,11 @@ $(OBJ_DIR)/%.o: %.c
 # 	@printf "$(GREEN)🚀 Compilation de $(NAME) (bonus)...$(RESET)\r"
 # 	@$(CC) $(OBJ_FILES_BONUS) $(CFLAGS) -o $(NAME)
 # 	@printf "\n$(YELLOW)🚀 Compilation bonus fini ! $(GREEN)$(NAME) $(YELLOW)est prêt !$(RESET)\n"
+
+# Nettoyage des fichiers objets
+clean:
+	@echo "$(RED)🧹 Nettoyage des fichiers objets...$(RESET)"
+	@rm -rf $(OBJ_DIR)
 
 # Nettoyage complet
 fclean: clean
