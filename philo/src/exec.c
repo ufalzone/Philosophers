@@ -44,8 +44,6 @@ static void wait_philo_thread(t_global *global)
 
 static void init_exec_philo(t_global *global)
 {
-	t_thread_data *data;
-
 	gettimeofday(&global->start_time, NULL);
 	pthread_mutex_init(&global->mutex_death, NULL);
 	pthread_mutex_init(&global->mutex_print, NULL);

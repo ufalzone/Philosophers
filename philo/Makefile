@@ -25,16 +25,16 @@ NAME = philo
 SRC_DIR = src
 INCLUDE_DIR = includes
 OBJ_DIR = obj
+DEPFLAGS = -MMD -MP
 
 # Fichiers sources et objets
 SRC_FILES = $(shell find $(SRC_DIR) -type f -name "*.c")
 OBJ_FILES = $(SRC_FILES:%.c=$(OBJ_DIR)/%.o)
-OBJ_FILES_BONUS = $(SRC_FILES_BONUS:%.c=$(OBJ_DIR)/%.o)
 DEP_FILES = $(OBJ_FILES:.o=.d) $(OBJ_FILES_BONUS:.o=.d)
 
 # Flags de compilation
 CC = cc
-CFLAGS = -I$(INCLUDE_DIR) -g3
+CFLAGS = -I$(INCLUDE_DIR) -g3 -Wall -Wextra -Werror
 
 # Règles
 .PHONY: all clean fclean re
@@ -50,29 +50,23 @@ $(OBJ_DIR):
 
 # Compile le projet push_swap
 $(NAME): $(OBJ_FILES)
-	@printf "$(GREEN)🚀 Compilation de $(NAME)...$(RESET)                                                                \r"
+	@printf "$(GREEN)🚀 Compilation de $(NAME)$(RESET)                                                                \r"
 	@$(CC) $(OBJ_FILES) $(CFLAGS) -o $(NAME)
 	@printf "\n$(YELLOW)🚀 Compilation fini ! $(GREEN)$(NAME) $(YELLOW)est prêt !$(RESET)                            \n"
 
 # Règle de compilation des fichiers objets
 $(OBJ_DIR)/%.o: %.c
 	@printf "$(CYAN)🔄 Compilation de $<...$(RESET)\r"
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-# #Regle bonus
-# bonus: fclean $(OBJ_DIR) $(OBJ_FILES_BONUS)
-# 	@printf "$(GREEN)🚀 Compilation de $(NAME) (bonus)...$(RESET)\r"
-# 	@$(CC) $(OBJ_FILES_BONUS) $(CFLAGS) -o $(NAME)
-# 	@printf "\n$(YELLOW)🚀 Compilation bonus fini ! $(GREEN)$(NAME) $(YELLOW)est prêt !$(RESET)\n"
+	@$(CC) $(CFLAGS) $(DEPFLAGS) -c $< -o $@
 
 # Nettoyage des fichiers objets
 clean:
-	@echo "$(RED)🧹 Nettoyage des fichiers objets...$(RESET)"
+	@echo "$(RED)🧹 Nettoyage des fichiers objets$(RESET)"
 	@rm -rf $(OBJ_DIR)
 
 # Nettoyage complet
 fclean: clean
-	@echo "$(RED)🗑️  Suppression de $(NAME)...$(RESET)"
+	@echo "$(RED)🗑️ Suppression de $(NAME).$(RESET)"
 	@rm -f $(NAME)
 
 # Recompile tout

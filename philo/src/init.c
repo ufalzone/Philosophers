@@ -62,7 +62,7 @@ void	init_all_philo(t_global *global)
 		if (!global->philo_array[i])
 			return ;
 		global->philo_array[i]->id = i;
-		global->philo_array[i]->id_thread = i;
+		// global->philo_array[i]->id_thread = i;
 		global->philo_array[i]->nb_repas = 0;
 		global->philo_array[i]->dernier_repas = 0;
 		global->philo_array[i]->fourchette_gauche = &global->fourchette[i];

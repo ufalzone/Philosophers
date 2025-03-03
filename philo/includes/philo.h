@@ -52,7 +52,6 @@ long elapsed_time(struct timeval start);
 
 // Init
 void	init_global(t_global *global, int ac, char **av);
-void	init_fourchette(t_global *global);
 void	init_all_philo(t_global *global);
 
 // Exec
