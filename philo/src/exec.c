@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:31:12 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/02/28 14:51:23 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:23:37 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ static void create_philo_thread(t_global *global)
 			return;
 		global->thread_data[i]->philo = global->philo_array[i];
 		global->thread_data[i]->global = global;
-		global->philo_array[i]->dernier_repas = 0;
+		global->philo_array[i]->dernier_repas = elapsed_time(global->start_time);
 		global->philo_array[i]->nb_repas = 0;
 		pthread_create(&global->philo_array[i]->id_thread, NULL, (void *)routine, global->thread_data[i]);
+		usleep(100);
 		i++;
 	}
 }

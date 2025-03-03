@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 23:59:14 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/02/28 14:43:18 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:32:57 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static int monitor_verif_death(t_global *global)
 			pthread_mutex_unlock(&global->mutex_print);
 			return (1);
 		}
-			pthread_mutex_unlock(&global->mutex_meal);
-			i++;
+		pthread_mutex_unlock(&global->mutex_meal);
+		i++;
 	}
 	return (0);
 }
@@ -81,7 +81,12 @@ void monitor_thread(void *arg)
 			if (monitor_verif == 1 || monitor_is_alleat == 1)
 					return;
 		}
+		else
+		{
+			pthread_mutex_unlock(&global->mutex_death);
+			return;
+		}
 		pthread_mutex_unlock(&global->mutex_death);
-		usleep(100);
+		usleep(1000);
 	}
 }
