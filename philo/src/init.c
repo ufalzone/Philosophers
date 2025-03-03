@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:28:15 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/03/03 18:20:34 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:36:42 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	init_fourchette(t_global *global)
 {
-	int	i;
+	int				i;
 	pthread_mutex_t	*fourchette;
 
 	i = 0;
@@ -62,10 +62,10 @@ void	init_all_philo(t_global *global)
 		if (!global->philo_array[i])
 			return ;
 		global->philo_array[i]->id = i;
-		// global->philo_array[i]->id_thread = i;
 		global->philo_array[i]->nb_repas = 0;
 		global->philo_array[i]->fourchette_gauche = &global->fourchette[i];
-		global->philo_array[i]->fourchette_droite = &global->fourchette[(i + 1) % global->nb_philo];
+		global->philo_array[i]->fourchette_droite = &global->fourchette[(i + 1)
+			% global->nb_philo];
 		i++;
 	}
 }

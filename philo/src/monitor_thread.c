@@ -6,21 +6,22 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 23:59:14 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/03/03 18:32:57 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:36:11 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static int monitor_verif_death(t_global *global)
+static int	monitor_verif_death(t_global *global)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < global->nb_philo)
 	{
 		pthread_mutex_lock(&global->mutex_meal);
-		if (elapsed_time(global->start_time) - global->philo_array[i]->dernier_repas > global->time_to_die)
+		if (elapsed_time(global->start_time)
+			- global->philo_array[i]->dernier_repas > global->time_to_die)
 		{
 			pthread_mutex_unlock(&global->mutex_meal);
 			pthread_mutex_lock(&global->mutex_death);
@@ -28,7 +29,8 @@ static int monitor_verif_death(t_global *global)
 			pthread_mutex_unlock(&global->mutex_death);
 			pthread_mutex_lock(&global->mutex_print);
 			printf("\033[31m[%ld] %d est mort\033[0m\n",
-			elapsed_time(global->start_time), global->philo_array[i]->id + 1);
+				elapsed_time(global->start_time), global->philo_array[i]->id
+				+ 1);
 			pthread_mutex_unlock(&global->mutex_print);
 			return (1);
 		}
@@ -38,9 +40,9 @@ static int monitor_verif_death(t_global *global)
 	return (0);
 }
 
-static int monitor_verif_alleat(t_global *global)
+static int	monitor_verif_alleat(t_global *global)
 {
-	int i;
+	int	i;
 
 	if (global->if_nb_eat != 1)
 		return (0);
@@ -62,12 +64,11 @@ static int monitor_verif_alleat(t_global *global)
 	return (1);
 }
 
-
-void monitor_thread(void *arg)
+void	monitor_thread(void *arg)
 {
-	t_global *global;
-	int monitor_verif;
-	int monitor_is_alleat;
+	t_global	*global;
+	int			monitor_verif;
+	int			monitor_is_alleat;
 
 	global = (t_global *)arg;
 	while (1)
@@ -79,12 +80,12 @@ void monitor_thread(void *arg)
 			monitor_verif = monitor_verif_death(global);
 			monitor_is_alleat = monitor_verif_alleat(global);
 			if (monitor_verif == 1 || monitor_is_alleat == 1)
-					return;
+				return ;
 		}
 		else
 		{
 			pthread_mutex_unlock(&global->mutex_death);
-			return;
+			return ;
 		}
 		pthread_mutex_unlock(&global->mutex_death);
 		usleep(1000);

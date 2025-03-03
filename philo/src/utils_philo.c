@@ -6,13 +6,23 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:29:24 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/02/28 00:09:25 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:48:39 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void ft_error(char *message)
+int	check_death(t_thread_data *data)
+{
+	int	dead;
+
+	pthread_mutex_lock(&data->global->mutex_death);
+	dead = (data->global->somebody_is_dead == 1);
+	pthread_mutex_unlock(&data->global->mutex_death);
+	return (dead);
+}
+
+void	ft_error(char *message)
 {
 	printf("%s%s", RED, message);
 	exit(1);
@@ -38,10 +48,26 @@ void	check_args(int ac, char **av)
 	}
 }
 
-long elapsed_time(struct timeval start)
+long	elapsed_time(struct timeval start)
 {
-	struct timeval now;
+	struct timeval	now;
 
 	gettimeofday(&now, NULL);
-	return ((now.tv_sec - start.tv_sec) * 1000 + (now.tv_usec - start.tv_usec) / 1000);
+	return ((now.tv_sec - start.tv_sec) * 1000 + (now.tv_usec - start.tv_usec)
+		/ 1000);
+}
+
+void	print_action(t_thread_data *data, char *action)
+{
+	pthread_mutex_lock(&data->global->mutex_print);
+	if (check_death(data))
+	{
+		pthread_mutex_unlock(&data->global->mutex_print);
+		return ;
+	}
+	printf("\033[33m[%ld]\033[0m \033[1m%d\033[0m %s\n",
+		elapsed_time(data->global->start_time),
+		data->philo->id + 1,
+		action);
+	pthread_mutex_unlock(&data->global->mutex_print);
 }

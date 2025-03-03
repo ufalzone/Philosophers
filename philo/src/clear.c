@@ -6,15 +6,15 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:51:32 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/02/28 14:51:50 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:36:23 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void clear_all_philo(t_global *global)
+void	clear_all_philo(t_global *global)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	pthread_mutex_destroy(&global->mutex_death);
