@@ -6,7 +6,7 @@
 #    By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/30 18:16:42 by ufalzone          #+#    #+#              #
-#    Updated: 2025/02/28 13:25:48 by ufalzone         ###   ########.fr        #
+#    Updated: 2025/03/04 15:41:46 by ufalzone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ DEP_FILES = $(OBJ_FILES:.o=.d) $(OBJ_FILES_BONUS:.o=.d)
 
 # Flags de compilation
 CC = cc
-CFLAGS = -I$(INCLUDE_DIR) -g3 -Wall -Wextra -Werror
+CFLAGS = -I$(INCLUDE_DIR) -g3 -Wall -Wextra -Werror -fsanitize=thread -O3
 
 # Règles
 .PHONY: all clean fclean re

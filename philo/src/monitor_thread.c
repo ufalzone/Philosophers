@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 23:59:14 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/03/03 18:36:11 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:01:52 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,32 @@
 
 static int	monitor_verif_death(t_global *global)
 {
-	int	i;
+	int		i;
+	long	current_time;
+	long	last_meal;
 
 	i = 0;
 	while (i < global->nb_philo)
 	{
 		pthread_mutex_lock(&global->mutex_meal);
-		if (elapsed_time(global->start_time)
-			- global->philo_array[i]->dernier_repas > global->time_to_die)
+		current_time = elapsed_time(global->start_time);
+		last_meal = global->philo_array[i]->dernier_repas;
+		if (current_time - last_meal > global->time_to_die)
 		{
-			pthread_mutex_unlock(&global->mutex_meal);
 			pthread_mutex_lock(&global->mutex_death);
+			if (global->somebody_is_dead)
+			{
+				pthread_mutex_unlock(&global->mutex_death);
+				pthread_mutex_unlock(&global->mutex_meal);
+				return (1);
+			}
 			global->somebody_is_dead = 1;
 			pthread_mutex_unlock(&global->mutex_death);
 			pthread_mutex_lock(&global->mutex_print);
 			printf("\033[31m[%ld] %d est mort\033[0m\n",
-				elapsed_time(global->start_time), global->philo_array[i]->id
-				+ 1);
+				current_time, global->philo_array[i]->id + 1);
 			pthread_mutex_unlock(&global->mutex_print);
+			pthread_mutex_unlock(&global->mutex_meal);
 			return (1);
 		}
 		pthread_mutex_unlock(&global->mutex_meal);
@@ -81,13 +89,12 @@ void	monitor_thread(void *arg)
 			monitor_is_alleat = monitor_verif_alleat(global);
 			if (monitor_verif == 1 || monitor_is_alleat == 1)
 				return ;
+			usleep(50);
 		}
 		else
 		{
 			pthread_mutex_unlock(&global->mutex_death);
 			return ;
 		}
-		pthread_mutex_unlock(&global->mutex_death);
-		usleep(1000);
 	}
 }
