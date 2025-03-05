@@ -6,11 +6,18 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 15:28:15 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/03/03 18:36:42 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/03/05 12:35:49 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	init_last_meal(t_thread_data *data)
+{
+	pthread_mutex_lock(&data->global->mutex_meal);
+	data->philo->dernier_repas = elapsed_time(data->global->start_time);
+	pthread_mutex_unlock(&data->global->mutex_meal);
+}
 
 static void	init_fourchette(t_global *global)
 {

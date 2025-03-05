@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 17:51:13 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/03/03 18:41:47 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/03/04 19:35:38 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ void	check_args(int ac, char **av);
 void	print_action(t_thread_data *data, char *action);
 int		check_death(t_thread_data *data);
 long	elapsed_time(struct timeval start);
-
+void	wait_all_threads(t_thread_data *data);
 /* Init */
 void	init_global(t_global *global, int ac, char **av);
 void	init_all_philo(t_global *global);
+void	init_last_meal(t_thread_data *data);
 
 /* Exec */
 void	exec_philo(t_global *global);

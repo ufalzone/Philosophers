@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 18:34:18 by ufalzone          #+#    #+#             */
-/*   Updated: 2025/03/03 18:44:01 by ufalzone         ###   ########.fr       */
+/*   Updated: 2025/03/05 12:44:51 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ typedef struct s_global
 	int						time_to_eat;
 	int						time_to_sleep;
 	int						nb_eat;
+	int						simulation_ready_to_go;
 	int						if_nb_eat;
 	int						somebody_is_dead;
 	pthread_mutex_t			mutex_death;
 	pthread_mutex_t			mutex_print;
 	pthread_mutex_t			mutex_meal;
+	pthread_mutex_t			mutex_start;
 	pthread_mutex_t			*fourchette;
 	struct s_philo			**philo_array;
 	struct timeval			start_time;
